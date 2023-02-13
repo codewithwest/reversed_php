@@ -1,20 +1,6 @@
 <?php
-  
-
- $dbservername ='localhost';
- $dbusername = 'root';
- $dbpassword = '';
- $dbname = 'post_app';
- 
- $conn = mysqli_connect($dbservername, $dbusername,$dbpassword);
- mysqli_select_db($conn, $dbname);
- 
-
-// Check connection
-if (!$conn) {
-    die("Unable to Connect database: " . mysqli_connect_error());
-}
- $u = '@mail.com';
+include('../connection/conn.php');
+ $u;
 
 // fetch query
 function fetch_data($connection, $unames){

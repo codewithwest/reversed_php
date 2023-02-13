@@ -1,5 +1,5 @@
 
-    
+// Handles the email text area data match checks  
 export function userNameValidation(UserNameTextArea, usernameList) {
         if (UserNameTextArea.value.length > 3) {
             if(usernameList.includes(UserNameTextArea.value)){
@@ -21,8 +21,7 @@ export function userNameValidation(UserNameTextArea, usernameList) {
         }
         }
 
-
-     
+// Handles the email text area validity match check  
 
 function validateEmail(emailId)
 {
@@ -38,6 +37,7 @@ else
 return false;
 }
 }
+// Handles the email text area data match checks  
 
 export function emailValidation(emailTextArea, emailList) {
     if (validateEmail(emailTextArea) == true) {
@@ -61,6 +61,7 @@ export function emailValidation(emailTextArea, emailList) {
         }
 }
 
+// Handles the password text area match checks  
 
  export  function passwordValidation(passwordTextArea) {
     if (passwordTextArea.value.length > 6 ) {
@@ -86,6 +87,7 @@ export function emailValidation(emailTextArea, emailList) {
     }
 }
 
+// Handles the password and confirm password match 
  
 export function passwordConfirmValidation(confirmPasswordTextArea, passwordTextArea) {  
     

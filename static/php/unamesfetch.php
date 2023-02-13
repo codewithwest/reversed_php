@@ -1,19 +1,6 @@
 <?php
-  
-
- $dbservername ='localhost';
- $dbusername = 'root';
- $dbpassword = '';
- $dbname = 'post_app';
- 
- $conn = mysqli_connect($dbservername, $dbusername,$dbpassword);
- mysqli_select_db($conn, $dbname);
-// Check connection
-if (!$conn) {
-    die("Unable to Connect database: " . mysqli_connect_error());
-}
-
- $u = 'west';
+include('../connection/conn.php');
+ $u;
 
 // fetch query
 function fetch_data($connection, $unames){
@@ -30,20 +17,12 @@ function fetch_data($connection, $unames){
       // if more tha one value in list
       $unames = $row['username'];
       array_push($byte, $unames);
-      # code...
-      // return "$unames";
-      // echo "<script>alert("tru")</script>";
-      // return true;
       } 
       // header("Content-Type: application/json");
   echo json_encode($byte,JSON_PRETTY_PRINT);
       // echo(print_r($byte));
   }
   
- 
-
-  
-
 fetch_data($conn, $u)
 
 ?>
