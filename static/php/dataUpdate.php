@@ -11,6 +11,8 @@ if (isset($_POST['update_username'])) {
     // $email = $_SESSION['email'];
 
     $username = $_SESSION['username'];
+    $currentEmail = $_SESSION['email'];
+    echo $currentEmail;
     $usernameUpdate = $_POST['update_username'];
     $emailUpdate = $_POST['update_email'];
     
@@ -24,30 +26,46 @@ if (isset($_POST['update_username'])) {
 
     // checks number of rows returned if not "0" makes email = $value 
     $row = mysqli_num_rows($result);
-    $currentEmail = $myEmail['email'];
+    
     if ($row == 0) {
 		echo ("$username is not found");
 	} else {
-        if ($usernameUpdate !== $username) {
+        if($emailUpdate !== $currentEmail && $usernameUpdate !== $username) {
+            // username update
+            $query = "UPDATE `accounts` SET `username`= '$usernameUpdate' WHERE `username` = '$username'; ";
+            $result = mysqli_query($conn, $query);
+            $_SESSION['username'] = $usernameUpdate; 
+
+            // email Update
+            $query = "UPDATE `accounts` SET `email`= '$emailUpdate' WHERE `email` = '$currentEmail'; ";
+            // runs query to database
+            $result = mysqli_query($conn, $query);
+            $_SESSION['email'] = $emailUpdate; 
+            header('Location: ../views/dashboard.php');
+            
+        }
+       else if ($usernameUpdate !== $username) {
             $query = "UPDATE `accounts` SET `username`= '$usernameUpdate' WHERE `username` = '$username'; ";
             // runs query to database
             $result = mysqli_query($conn, $query);
-            $username = $usernameUpdate;
+            $_SESSION['username'] = $usernameUpdate;
+            // header('Location: ../views/dashboard.php');
            
         } else if($emailUpdate !== $currentEmail){
-            $query = "UPDATE `accounts` SET `email`= '$emailUpdate' WHERE `username` = '$username'; ";
-            // runs query to database
-            $result = mysqli_query($conn, $query);
-            $currentEmail = $usernameUpdate; 
-        }elseif($emailUpdate !== $currentEmail && $usernameUpdate !== $username) {
             $query = "UPDATE `accounts` SET `email`= '$emailUpdate' WHERE `email` = '$currentEmail'; ";
-            $_SESSION['username'] = $usernameUpdate; 
             // runs query to database
             $result = mysqli_query($conn, $query);
-            
+            $_SESSION['email'] = $emailUpdate; 
+           
+
+            header('Location: ../views/dashboard.php');
+
+        }else if($emailUpdate == $currentEmail && $usernameUpdate == $username) {
+            header('Location: ../views/dashboard.php');
         }
-        
-        // this is the query to update to the database
+        else{
+            header('Location: ../views/dashboard.php');
+        }
 
     }
 }

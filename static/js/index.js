@@ -30,7 +30,7 @@ let emails = []
 let emailsAndPass = []
 
 // Ajax function that uses defined php file to fetch data from sql database
-async function aj() {
+export async function aj() {
     //  Get all the existing usernames
 $.ajax({  
     type: "GET",
@@ -73,7 +73,7 @@ $.ajax({
 }
 // Calls the aj function
 
-aj();
+
 var rUserName = false
 var rEmail = false
 var rPassword = false
@@ -147,6 +147,7 @@ var passTextArea = document.getElementById('password')
 // Submits if data matched one the the database pairs
 // Also iterates through the database data
 // else returns an error message
+
 loginForm.addEventListener('submit',(e)=>{  
 aj();
  e.preventDefault()  

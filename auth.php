@@ -3,6 +3,7 @@ session_start();
 $os = strval(php_uname());
 if (str_contains($os, 'Windows')) {
     include('static/connection/conn.php');
+    echo "one";
 }else {
     include('./static/connection/conn.php');
     echo $PHP_OS;
@@ -20,14 +21,25 @@ if (isset($_POST['s-username'])) {
     $query = "INSERT INTO `accounts`(`username`, `email`, `password`) VALUES ('$uname','$email','$pass')";
     //  perform the query
     $result = mysqli_query($conn, $query);
-}elseif(isset($_POST['username'])  ) {
+}
+if(isset($_POST['username'])) {
     echo "You Have Successfully logged In Welcome to reversed";
-    session_regenerate_id();
+    // session_regenerate_id();
     $_SESSION['loggedin'] = TRUE;
     $_SESSION['username'] = $_POST['username'];
-    $_SESSION['email'] = $_POST['email'];
-    // $_SESSION['id'] = $id;
+   
+    $fetchusername = $_SESSION['username'];
+    $query = "SELECT `email` FROM `accounts` WHERE `username` = '$fetchusername';";
+    // runs query to database
+    $result = mysqli_query($conn, $query);
+    $myEmail = mysqli_fetch_assoc($result);
+    // checks number of rows returned if not "0" makes email = $value 
+    $_SESSION['email'] = $myEmail['email'];
+    
     header('Location: ./static/views/dashboard.php');
+   
 
 }
+
+
 ?>

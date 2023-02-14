@@ -1,3 +1,6 @@
+
+
+
 var profilePop = document.getElementById('nav-icon')
 
 profilePop.addEventListener('click',()=>{
@@ -14,15 +17,87 @@ collapseProfileBtn.addEventListener('click',()=>{
     document.getElementById('profile').style.display="none"
 })
 
-var updateButton = document.getElementById('updateForm')
-updateButton.addEventListener('submit', (e)=>{
-    
-    e.preventDefault()
-    e.target.submit()
+
+
+var logOut = document.getElementById('logOutForm')
+
+logOut.addEventListener('submit',(e)=>{
+    alert('logging out');
+    // logOut.setAttribute('method', )
 })
 
-var logOut = document.getElementById('logOutBtn')
+let usernames = []
+let emails = []
+let emailsAndPass = []
 
-logOut.addEventListener('click',()=>{
-    alert(" are ou sure")
+// Ajax function that uses defined php file to fetch data from sql database
+export async function aj() {
+    //  Get all the existing usernames
+$.ajax({  
+    type: "GET",
+    url: "./static/php/unamesfetch.php",
+    dataType: "json",                  
+    success: function(data){  
+        usernames = data
+    },
+    error:function(e){
+        console.log(e)
+    }
+});
+// Emails that exist in the database
+$.ajax({  
+    type: "GET",
+    url: "./static/php/emailsfetch.php",
+    dataType: "json",                  
+    success: function(data){  
+        emails = data
+       
+    },
+    error:function(e){
+        console.log(e)
+    }
+});
+// Password fetch
+$.ajax({  
+    type: "GET",
+    url: "./static/php/passwordfetch.php",
+    dataType: "json",                  
+    success: function(data){  
+        emailsAndPass = data
+       
+    },
+    error:function(){
+        console.log(1327)
+    }
+
+});
+}
+
+
+var updateButton = document.getElementById('updateForm')
+var updateUserNTextField = document.getElementById('update_username')
+var updateUserETextField = document.getElementById('update_email')
+
+var unChange = false
+var ueChange = false
+    updateUserNTextField.addEventListener('input', (e)=>{
+        unChange =  true
+    })
+updateUserETextField.addEventListener('input', (e)=>{
+    ueChange =  true
+})
+updateButton.addEventListener('submit', (e)=>{   
+    if (unChange == true && ueChange == true) {
+       alert("User Details Updated")
+    }
+    else if(ueChange == true){
+        alert("User Email Updated")
+    }
+    else if(unChange == true){
+        alert("Users Username Updated")
+    }
+    else {
+         e.preventDefault()
+    }
+
 })
