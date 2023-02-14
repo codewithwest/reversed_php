@@ -1,6 +1,6 @@
 <?php
 include('../connection/conn.php');
- $u;
+ $u = '';
 
 // fetch query
 function fetch_data($connection, $unames){

@@ -30,7 +30,7 @@ let emails = []
 let emailsAndPass = []
 
 // Ajax function that uses defined php file to fetch data from sql database
-function aj() {
+async function aj() {
     //  Get all the existing usernames
 $.ajax({  
     type: "GET",
@@ -72,8 +72,8 @@ $.ajax({
 });
 }
 // Calls the aj function
-aj();
 
+aj();
 var rUserName = false
 var rEmail = false
 var rPassword = false
@@ -84,6 +84,7 @@ var rCPassword = false
 var registrationUserName = document.getElementById('s-username');
 // Listens for any change in the registration username text area
 registrationUserName.addEventListener('change', (e)=>{
+    aj();
     if(userNameValidation(registrationUserName, usernames) == true){
         rUserName = true
     }else{
@@ -93,6 +94,7 @@ registrationUserName.addEventListener('change', (e)=>{
 // Listens for any change in the email username text area
 var registrationEmail = document.getElementById('email')
 registrationEmail.addEventListener('change', ()=>{
+    aj();
    if(emailValidation(registrationEmail, emails) == true){
         rEmail = true
    }
@@ -104,6 +106,7 @@ registrationEmail.addEventListener('change', ()=>{
 // Listens for any change in the registration password text area
 var registrationPassword = document.getElementById('s-password') 
 registrationPassword.addEventListener('change', ()=>{
+    aj();
      if(passwordValidation(registrationPassword)==true){
         rPassword = true
      }else{
@@ -114,6 +117,7 @@ registrationPassword.addEventListener('change', ()=>{
 // Listens for any change in the confirm password text area if it equals the password value
 var registrationConfirmPassword = document.getElementById('sc-password')
 registrationConfirmPassword.addEventListener('change', ()=>{
+    aj();
      if(passwordConfirmValidation(registrationConfirmPassword,registrationPassword)==true){
         rCPassword = true
      }else{
@@ -124,6 +128,7 @@ registrationConfirmPassword.addEventListener('change', ()=>{
 // Checks if all the text areas return a true value and submit if yes
 var registerButton = document.getElementById('registerForm')
 registerButton.addEventListener('submit',(e)=>{
+    aj();
     e.preventDefault()
     if ((rUserName && rEmail && rPassword && rCPassword ) == true) {
         e.currentTarget.submit()
@@ -143,9 +148,13 @@ var passTextArea = document.getElementById('password')
 // Also iterates through the database data
 // else returns an error message
 loginForm.addEventListener('submit',(e)=>{  
+aj();
  e.preventDefault()  
     for (const pair in emailsAndPass) {
             if (emailsAndPass[pair][0] == loginTextArea.value && emailsAndPass[pair][1] == passTextArea.value) {
+                document.getElementById('password-alert').innerHTML ="";
+                document.getElementById('username-alert').innerHTML ="";
+                
                 e.currentTarget.submit()
                 return
             }

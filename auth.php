@@ -1,6 +1,15 @@
 <?php
 session_start();
-include('./static/connection/conn.php');
+$os = strval(php_uname());
+if (str_contains($os, 'Windows')) {
+    include('static/connection/conn.php');
+}else {
+    include('./static/connection/conn.php');
+    echo $PHP_OS;
+    // echo 'Linux';
+}
+
+
 
 if (isset($_POST['s-username'])) {
      $uname = $_POST['s-username'];
@@ -11,14 +20,14 @@ if (isset($_POST['s-username'])) {
     $query = "INSERT INTO `accounts`(`username`, `email`, `password`) VALUES ('$uname','$email','$pass')";
     //  perform the query
     $result = mysqli_query($conn, $query);
-}elseif(isset($_POST['username'])) {
+}elseif(isset($_POST['username'])  ) {
     echo "You Have Successfully logged In Welcome to reversed";
     session_regenerate_id();
     $_SESSION['loggedin'] = TRUE;
     $_SESSION['username'] = $_POST['username'];
     $_SESSION['email'] = $_POST['email'];
     // $_SESSION['id'] = $id;
-    header('Location: ./static/templates/dashboard.php');
+    header('Location: ./static/views/dashboard.php');
 
 }
 ?>
