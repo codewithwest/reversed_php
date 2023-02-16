@@ -85,7 +85,7 @@ var registrationUserName = document.getElementById('s-username');
 // Listens for any change in the registration username text area
 registrationUserName.addEventListener('change', (e)=>{
     aj();
-    if(userNameValidation(registrationUserName, usernames) == true){
+    if(userNameValidation(registrationUserName, usernames, 's-uname-alert') == true){
         rUserName = true
     }else{
         rUserName = false
@@ -95,7 +95,7 @@ registrationUserName.addEventListener('change', (e)=>{
 var registrationEmail = document.getElementById('email')
 registrationEmail.addEventListener('change', ()=>{
     aj();
-   if(emailValidation(registrationEmail, emails) == true){
+   if(emailValidation(registrationEmail, emails,'s-email-alert') == true){
         rEmail = true
    }
    else{

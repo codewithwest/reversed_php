@@ -12,7 +12,7 @@ if (isset($_POST['update_username'])) {
 
     $username = $_SESSION['username'];
     $currentEmail = $_SESSION['email'];
-    echo $currentEmail;
+
     $usernameUpdate = $_POST['update_username'];
     $emailUpdate = $_POST['update_email'];
     
@@ -22,7 +22,6 @@ if (isset($_POST['update_username'])) {
     // runs query to database
     $result = mysqli_query($conn, $query);
     $myEmail = mysqli_fetch_assoc($result);
-    
 
     // checks number of rows returned if not "0" makes email = $value 
     $row = mysqli_num_rows($result);
@@ -49,7 +48,7 @@ if (isset($_POST['update_username'])) {
             // runs query to database
             $result = mysqli_query($conn, $query);
             $_SESSION['username'] = $usernameUpdate;
-            // header('Location: ../views/dashboard.php');
+            header('Location: ../views/dashboard.php');
            
         } else if($emailUpdate !== $currentEmail){
             $query = "UPDATE `accounts` SET `email`= '$emailUpdate' WHERE `email` = '$currentEmail'; ";

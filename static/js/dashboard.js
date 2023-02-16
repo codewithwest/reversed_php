@@ -1,3 +1,4 @@
+import { emailValidation, userNameValidation } from "./functions.js"
 
 
 
@@ -31,27 +32,16 @@ let emails = []
 let emailsAndPass = []
 
 // Ajax function that uses defined php file to fetch data from sql database
-export async function aj() {
+async function aj() {
     //  Get all the existing usernames
-$.ajax({  
-    type: "GET",
-    url: "./static/php/unamesfetch.php",
-    dataType: "json",                  
-    success: function(data){  
-        usernames = data
-    },
-    error:function(e){
-        console.log(e)
-    }
-});
+
 // Emails that exist in the database
 $.ajax({  
     type: "GET",
-    url: "./static/php/emailsfetch.php",
+    url: "../php/emailsfetch.php",
     dataType: "json",                  
     success: function(data){  
         emails = data
-       
     },
     error:function(e){
         console.log(e)
@@ -60,10 +50,22 @@ $.ajax({
 // Password fetch
 $.ajax({  
     type: "GET",
-    url: "./static/php/passwordfetch.php",
+    url: "../php/passwordfetch.php",
     dataType: "json",                  
     success: function(data){  
         emailsAndPass = data
+    },
+    error:function(){
+        console.log(1327)
+    }
+
+});
+$.ajax({  
+    type: "GET",
+    url: "../php/unamesfetch.php",
+    dataType: "json",                  
+    success: function(data){  
+        usernames = data
        
     },
     error:function(){
@@ -73,7 +75,7 @@ $.ajax({
 });
 }
 
-
+aj();
 var updateButton = document.getElementById('updateForm')
 var updateUserNTextField = document.getElementById('update_username')
 var updateUserETextField = document.getElementById('update_email')
@@ -87,17 +89,25 @@ updateUserETextField.addEventListener('input', (e)=>{
     ueChange =  true
 })
 updateButton.addEventListener('submit', (e)=>{   
-    if (unChange == true && ueChange == true) {
+    if ((((unChange == true) && (userNameValidation(updateUserNTextField,usernames, 'user_name_update_err') == true)) && ((ueChange == true && emailValidation(updateUserETextField,emails, 'email_update_err') == true)))) {
        alert("User Details Updated")
     }
-    else if(ueChange == true){
+    else if(ueChange == true && (emailValidation(updateUserETextField,emails, 'email_update_err') == true)){
         alert("User Email Updated")
     }
-    else if(unChange == true){
+    else if(unChange == true && (userNameValidation(updateUserNTextField,usernames, 'user_name_update_err')==true)){
         alert("Users Username Updated")
     }
     else {
          e.preventDefault()
     }
 
+})
+
+
+var delAcc = document.getElementById('delAccountBtn')
+delAcc.addEventListener('click',(e)=>{
+    // e.preventDefault()
+    alert('Are Sure You Want To delete account?')
+   
 })

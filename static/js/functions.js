@@ -1,22 +1,22 @@
 
 // Handles the email text area data match checks  
-export function userNameValidation(UserNameTextArea, usernameList) {
+export function userNameValidation(UserNameTextArea, usernameList, errorMessageId) {
         if (UserNameTextArea.value.length > 3) {
             if(usernameList.includes(UserNameTextArea.value)){
                 UserNameTextArea.style.borderColor="red"
-                document.getElementById('s-uname-alert').innerHTML ="";
-                document.getElementById('s-uname-alert').appendChild(document.createTextNode('Username Taken'))
+                document.getElementById(errorMessageId).innerHTML ="";
+                document.getElementById(errorMessageId).appendChild(document.createTextNode('Username Taken'))
             
             }else{
                 UserNameTextArea.style.borderColor="green"
-            document.getElementById('s-uname-alert').innerHTML ="";
+            document.getElementById(errorMessageId).innerHTML ="";
             return true
         }
             }
         else{
             UserNameTextArea.style.borderColor="red"
-            document.getElementById('s-uname-alert').innerHTML ="";
-            document.getElementById('s-uname-alert').appendChild(document.createTextNode('Username Too Short'))
+            document.getElementById(errorMessageId).innerHTML ="";
+            document.getElementById(errorMessageId).appendChild(document.createTextNode('Username Too Short'))
  
         }
         }
@@ -39,25 +39,25 @@ return false;
 }
 // Handles the email text area data match checks  
 
-export function emailValidation(emailTextArea, emailList) {
+export function emailValidation(emailTextArea, emailList, emailErrMessageId) {
     if (validateEmail(emailTextArea) == true) {
         if(emailList.includes(emailTextArea.value)){
             emailTextArea.style.borderColor="red"
-            document.getElementById('s-email-alert').innerHTML ="";
-            document.getElementById('s-email-alert').appendChild(document.createTextNode('Email Already Exist Sign I Instead'))
+            document.getElementById(emailErrMessageId).innerHTML ="";
+            document.getElementById(emailErrMessageId).appendChild(document.createTextNode('Email Already Exist Sign I Instead'))
             
         }else{
             // emailTextArea.focus()
             emailTextArea.style.borderColor="green"
-            document.getElementById('s-email-alert').innerHTML ="";
+            document.getElementById(emailErrMessageId).innerHTML ="";
             return true
         }
     }
         else{
             // emailTextArea.focus()
             emailTextArea.style.borderColor="red"
-            document.getElementById('s-email-alert').innerHTML ="";
-            document.getElementById('s-email-alert').appendChild(document.createTextNode('Invalid email'))
+            document.getElementById(emailErrMessageId).innerHTML ="";
+            document.getElementById(emailErrMessageId).appendChild(document.createTextNode('Invalid email'))
         }
 }
 
@@ -73,12 +73,7 @@ export function emailValidation(emailTextArea, emailList) {
             passwordTextArea.style.borderColor="red"
         document.getElementById('s-pass-alert').innerHTML ="";
         document.getElementById('s-pass-alert').appendChild(document.createTextNode('Password should contain Special characters,Upper,lowercase and numbers '))
-   
-
         }
-        // passwordTextArea.style.borderColor="green"
-        // document.getElementById('s-pass-alert').innerHTML ="";
-        // document.getElementById('s-email-alert').appendChild(document.createTextNode('Email Already Exist Sign I Instead'))
     }  
     else{
         passwordTextArea.style.borderColor="red"

@@ -280,7 +280,7 @@ h1{
 }
 
 .profile{
-    display: flex;
+    display: none;
     flex-direction: column;
     position: absolute;
     margin: 5% 25%;
@@ -323,28 +323,48 @@ h1{
     
 }
 .profile .profileDetails form{
-    display:  flex;
+    display: flex;
     flex-direction: column;
-    border: 1px solid white;
     height: 100%;
+}
+.profile .profileDetails .updateEmail , .profile .profileDetails .updateUserN{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.errMessage{
+    height: 10%;
+}
+.errMessage p {
+    font-size: 1rem;
+    height: fit-content;
+    text-align: center;
+    margin: 0;
+    color: red;
+
 }
 .profile .edit-username, .profile .edit-email, .edit_submit {
     display: flex;
-    height: 30%;
+    height: 100%;
     width: 100%;
 }
 .profile .edit-username input, .profile .edit-email input{
     display: flex;
-    height: 30%;
+    height: 50%;
     width: 70%;
     margin: auto;
     background: rgba(55, 55, 55, 0.458);
     color: #fff;
     border: none;
+    outline: none;
+    font-size: 1.2rem;
 }
 .profile .edit-username label, .profile .edit-email label{
     display: flex;
-    height: 30%;
+    height: 50%;
+    font-size: 1.2rem;
     width: 20%;
     margin: auto;
 }
@@ -353,9 +373,10 @@ h1{
     margin: auto;
     background: rgba(0, 255, 38, 0.858);
     border: none;
+    font-weight: 700;
 }
 .logOutDiv{
-    height: 30%;
+    height: 15%;
     width: 100%;
     display: flex;
     
@@ -368,12 +389,51 @@ h1{
     border: none;
 }
 .logOutDiv input{
-    height: 40%;
+    height: 70%;
     width: 40%;
-    background: rgb(84, 18, 18);
+    font-weight: 700;
+    background: rgba(242, 36, 36, 0.75);
     color: #fff;
+    border: none;
     margin: auto ;
 }
+.deleteAccount{
+    height: 15%;
+    width: 100%;
+    display: flex;
+}
+.deleteAccount form{
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+.deleteAccount form input{
+    height: 80%;
+    width: 50%;
+    margin: auto;
+    color: #fff;
+    font-weight: 700;
+    border: none;
+    background: rgba(215, 11, 11, 0.866);
+}
+.edit_submit input:hover{
+    background: rgba(162, 248, 3, 0.881);
+    box-shadow: 1px 1px  rgba(81, 0, 255, 0.258), -1px -1px rgba(43, 0, 255, 0.258);
+
+}
+.logOutDiv input:hover{
+    background: rgba(229, 3, 3, 0.961);
+    box-shadow: 1px 1px  rgba(0, 255, 38, 0.258), -1px -1px rgba(0, 255, 38, 0.258);
+
+
+}
+.deleteAccount input:hover{
+    background: rgba(219, 50, 4, 0.986);
+    box-shadow: 1px 1px  rgba(16, 19, 16, 0.258), -1px -1px rgba(8, 13, 9, 0.258);
+}
+
+
+
 
 @media only screen and (min-width: 800px) {    
     .navdis{
