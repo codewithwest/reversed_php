@@ -3,6 +3,10 @@
     include('../../auth.php');  
     if ($_SESSION['loggedin'] == true) {
 	session_start();
+    $imageProfileName = $_SESSION['username'];
+}else {
+        header('Location: /reversed_php/index.html');
+
 }
     
 ?>
@@ -14,6 +18,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DashBoard</title>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.scss">
 </head>
 <body>
     <!-- Page container -->
@@ -28,7 +33,9 @@
                 <li><a>BOX</a></li>
             </div>
             <div class="nav-icon" id="nav-icon">
-                <div class="navpic"></div>
+                <div class="navpic" id="navpic">
+                <img id="profileImageCont"  src="../assets/userProfile/<?php echo htmlspecialchars($_SESSION['username']); ?>.png" onError="this.src = '../assets/userProfile/user3.png'">
+            </div>
                 <div class="navname">
                     <p><?php echo htmlspecialchars($_SESSION['username']); ?></p>
                 </div>
@@ -43,7 +50,16 @@
                     <p>YOUR PROFILE</p>
                 </div>
                 <div class="profileDetails">
-    <form action="../php/dataUpdate.php" method="POST" id="updateForm">
+    <!-- image upload -->
+
+    <form action="../php/imageUpload.php" method="POST"  class="uploadPicForm" enctype="multipart/form-data">
+                <div class="updateUserImage">
+                        <input type="file" src="" alt="" name="profileImage" id="profileImage" value="">
+                        <button type="submit">Upload</button>
+                </div>
+            </form>
+    <!-- image upload -->
+    <form action="../php/dataUpdate.php" method="POST" id="updateForm" class="updateDetailsForm">
     <div class="updateUserN">
     <div class="edit-username">
         <label for="update_username"><p>Username:</p></label>
@@ -84,25 +100,37 @@
     
     </div>
             </div>
-            <div class="the-divs">
-            <div class="leftdiv">
-                <div class="leftheader"> 
-                </div>
-                <div class="leftdesc">
+            <div class="gameCont" id="gameCont">
+                <!-- Start Score Board -->
+                <div class="scores">
+                <div class="score-board">
+                    <p class="current-score"></p>
+               </div>
+                <div class="high-score-board">
+                    <p class="high-score"></p>
+               </div>
+               </div>
+                <!-- End Score Board -->
 
+                <!-- Start of Buttons -->
+                <div class="start-stop">
+                    <button class="start-button">
+                    >
+                </button>
+                <button class="stop-button">
+                    =
+                </button>
                 </div>
+                <!-- End of Buttons -->
+                <!-- Controlled Sprite -->
+               <div class="control-sprite">
+               </div>
+                <!-- End of controlled sprite -->
+        
+            
 
             </div>
-            <div class="rightdiv">
-                <div class="leftheader"> 
-                    
-                </div>
-                <div class="leftdesc">
-                     
-                </div>
-               
-
-            </div>
+            
         </div>
         
         </div>
